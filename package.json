@@ -1,0 +1,9 @@
+{
+  "name": "vedaai",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ]
+}
