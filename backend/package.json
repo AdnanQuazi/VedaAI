@@ -2,10 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,8 @@
     "@types/node": "^20.19.41",
     "tsx": "^4.22.3",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
