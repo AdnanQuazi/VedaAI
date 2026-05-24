@@ -62,10 +62,6 @@ const QuestionPaperSchema = new Schema(
   }
 );
 
-export type QuestionPaperDocument =
-  InferSchemaType<typeof QuestionPaperSchema>;
+export type QuestionPaperDocument = InferSchemaType<typeof QuestionPaperSchema>;
 
-export const QuestionPaper = model(
-  "QuestionPaper",
-  QuestionPaperSchema
-);
+export const QuestionPaper = model("QuestionPaper", QuestionPaperSchema);

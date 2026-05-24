@@ -20,7 +20,7 @@ const QuestionConfigSchema = new Schema(
       min: 1,
     },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const AssignmentSchema = new Schema(
@@ -89,7 +89,7 @@ const AssignmentSchema = new Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 export type AssignmentDocument = InferSchemaType<typeof AssignmentSchema>;
