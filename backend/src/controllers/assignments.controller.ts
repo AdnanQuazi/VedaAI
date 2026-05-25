@@ -13,8 +13,12 @@ export const createAssignment = async (req: any, res: any) => {
 };
 
 export const regenerateAssignment = async (req: any, res: any) => {
+  const assignmentId =
+    req.validated?.params?.id ||
+    req.params?.id;
+
   const result = await assignmentService.regenerateAssignment({
-    assignmentId: req.validated.params.id,
+    assignmentId,
     userId: req.user.id,
   });
 
@@ -22,10 +26,22 @@ export const regenerateAssignment = async (req: any, res: any) => {
 };
 
 export const getAssignment = async (req: any, res: any) => {
+  const assignmentId =
+    req.validated?.params?.id ||
+    req.params?.id;
+
   const result = await assignmentService.getAssignment({
-    assignmentId: req.validated.params.id,
+    assignmentId,
     userId: req.user.id,
   });
 
   return successResponse(res, 'Assignment fetched successfully', result);
+};
+
+export const getAssignments = async (req: any, res: any) => {
+  const result = await assignmentService.getAssignments({
+    userId: req.user.id,
+  });
+
+  return successResponse(res, 'Assignments fetched successfully', result);
 };

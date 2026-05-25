@@ -15,6 +15,10 @@ interface GetAssignmentInput {
   userId: string;
 }
 
+interface GetAssignmentsInput {
+  userId: string;
+}
+
 export const createAssignment = async (input: any) => {
   const assignment = await Assignment.create({
     userId: input.userId,
@@ -34,7 +38,6 @@ export const createAssignment = async (input: any) => {
 
   return assignment;
 };
-
 
 export const regenerateAssignment = async (
   input: RegenerateAssignmentInput,
@@ -72,7 +75,6 @@ export const regenerateAssignment = async (
   };
 };
 
-
 export const getAssignment = async (input: GetAssignmentInput) => {
   const assignment = await Assignment.findById(input.assignmentId).lean();
 
@@ -93,4 +95,25 @@ export const getAssignment = async (input: GetAssignmentInput) => {
 
     questionPaper,
   };
+};
+
+export const getAssignments = async (input: GetAssignmentsInput) => {
+  const assignments = await Assignment.find({
+    userId: input.userId,
+  })
+    .select(
+      `
+          _id
+          dueDate
+          status
+          fileName
+          createdAt
+        `,
+    )
+    .sort({
+      createdAt: -1,
+    })
+    .lean();
+
+  return assignments;
 };

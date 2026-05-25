@@ -17,3 +17,9 @@ export const assignmentSchema = z.object({
   query: z.object({}).optional(),
   params: z.object({}).optional(),
 });
+
+export const assignmentIdSchema = z.object({
+  params: z.object({
+    id: z.string().length(24, "Invalid assignment id"),
+  }),
+});

@@ -4,7 +4,10 @@ import * as assignmentController from '../controllers/assignments.controller';
 import { authMiddleware } from '../middleware/auth';
 import { parseAssignmentFormData } from '../middleware/parseAssignment';
 import { validate } from '../middleware/validate';
-import { assignmentSchema } from '../validators/assignment.validator';
+import {
+  assignmentSchema,
+  assignmentIdSchema,
+} from '../validators/assignment.validator';
 import { asyncHandler } from '../utils/asyncHandler';
 import { downloadPDF } from '../controllers/pdf.controller';
 
@@ -20,16 +23,31 @@ router.post(
 );
 export default router;
 
-router.post('/:id/download-pdf', authMiddleware, asyncHandler(downloadPDF));
+router.post(
+  '/:id/download-pdf',
+  authMiddleware,
+  validate(assignmentIdSchema),
+  asyncHandler(downloadPDF),
+);
 
 router.post(
   '/:id/regenerate',
   authMiddleware,
+  validate(assignmentIdSchema),
   asyncHandler(assignmentController.regenerateAssignment),
+);
+
+router.get(
+  "/",
+  authMiddleware,
+  asyncHandler(
+    assignmentController.getAssignments
+  )
 );
 
 router.get(
   '/:id',
   authMiddleware,
+  validate(assignmentIdSchema),
   asyncHandler(assignmentController.getAssignment),
 );

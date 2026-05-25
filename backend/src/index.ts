@@ -11,6 +11,7 @@ import './workers/generator.worker';
 import './workers/pdf.worker';
 import { errorHandler } from './middleware/errorHandler';
 import { initSocket } from './socket';
+import userRoutes from "./routes/user.routes";
 
 const app = express();
 app.use(cors({ origin: '*' }));
@@ -22,6 +23,7 @@ app.get('/', (_, res) => {
   res.send('Backend running');
 });
 
+app.use('/api/users', userRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use(errorHandler);
 
