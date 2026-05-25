@@ -1,4 +1,4 @@
-import { getIO } from '../socket';
+import { publisher } from "../config/redisPubSub";
 
 interface AssignmentStatusPayload {
   assignmentId: string;
@@ -7,16 +7,13 @@ interface AssignmentStatusPayload {
   message?: string;
 }
 
-export const emitAssignmentStatus = ({
-  assignmentId,
-  status,
-  progress,
-  message,
-}: AssignmentStatusPayload) => {
-  getIO().to(assignmentId).emit('assignment-status', {
-    assignmentId,
-    status,
-    progress,
-    message,
-  });
-};
+export const emitAssignmentStatus =
+  async (
+    payload: AssignmentStatusPayload
+  ) => {
+    await publisher.publish(
+      "assignment-status",
+
+      JSON.stringify(payload)
+    );
+  };

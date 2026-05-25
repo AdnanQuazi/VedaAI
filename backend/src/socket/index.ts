@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { Assignment } from '../models/Assignment.model';
 
+import { subscriber } from '../config/redisPubSub';
 let io: Server;
 
 export const initSocket = (server: any) => {
@@ -56,6 +57,26 @@ export const initSocket = (server: any) => {
     socket.on('disconnect', () => {
       console.log('Socket disconnected:', socket.id);
     });
+  });
+
+  subscriber.subscribe('assignment-status', (err) => {
+    if (err) {
+      console.error('Redis subscribe error:', err);
+    } else {
+      console.log('Subscribed to assignment-status channel');
+    }
+  });
+
+  subscriber.on('message', (channel, message) => {
+    if (channel === 'assignment-status') {
+      try {
+        const payload = JSON.parse(message);
+
+        io.to(payload.assignmentId).emit('assignment-status', payload);
+      } catch (error) {
+        console.error('Redis message parse error:', error);
+      }
+    }
   });
 
   return io;
