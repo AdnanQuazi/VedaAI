@@ -13,6 +13,12 @@ import { emitAssignmentStatus } from '../utils/socketEvents';
 export const assignmentWorker = new Worker(
   'assignment-queue',
   async (job) => {
+    await updateJobProgress({
+      job,
+      assignmentId: job.data.assignmentId,
+      status: 'processing',
+      progress: 10,
+    });
     const { assignmentId } = job.data;
 
     console.log(`Processing assignment: ${assignmentId}`);
@@ -28,12 +34,6 @@ export const assignmentWorker = new Worker(
 
       await assignment.save();
 
-      await updateJobProgress({
-        job,
-        assignmentId,
-        status: 'processing',
-        progress: 10,
-      });
 
       if (assignment.filePath && assignment.fileType) {
         await updateJobProgress({

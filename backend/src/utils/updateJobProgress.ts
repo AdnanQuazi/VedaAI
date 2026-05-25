@@ -12,9 +12,5 @@ export const updateJobProgress = async ({
   progress: number;
 }) => {
   await job.updateProgress(progress);
-  emitAssignmentStatus({
-    assignmentId,
-    status,
-    progress,
-  });
+  await emitAssignmentStatus({ assignmentId, status, progress }); 
 };

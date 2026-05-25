@@ -116,7 +116,7 @@ export const generateQuestionPaperPDF = async (assignmentId: string) => {
   doc
     .font('Helvetica-Bold')
     .fontSize(18)
-    .text(user?.schoolName || 'School Name', ML, y, {
+    .text(`${user?.schoolName}, ${user?.city}`, ML, y, {
       width: CW,
 
       align: 'center',
