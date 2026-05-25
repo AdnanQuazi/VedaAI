@@ -3,7 +3,7 @@ export class AppError extends Error {
 
   code: string;
 
-  constructor(message: string, statusCode: number, code = "INTERNAL_ERROR") {
+  constructor(message: string, statusCode: number, code = 'INTERNAL_ERROR') {
     super(message);
     this.status = statusCode;
     this.code = code;

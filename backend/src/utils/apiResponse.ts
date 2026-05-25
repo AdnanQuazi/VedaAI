@@ -1,10 +1,10 @@
-import { Response } from "express";
+import { Response } from 'express';
 
 export const successResponse = (
   res: Response,
   message: string,
   data?: unknown,
-  statusCode = 200
+  statusCode = 200,
 ) => {
   return res.status(statusCode).json({
     success: true,
@@ -18,7 +18,7 @@ export const errorResponse = (
   statusCode: number,
   code: string,
   message: string,
-  details?: unknown
+  details?: unknown,
 ) => {
   return res.status(statusCode).json({
     success: false,

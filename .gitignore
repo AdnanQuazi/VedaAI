@@ -26,3 +26,8 @@ npm-debug.log*
 .turbo
 
 .github/copilot-instructions.md
+
+backend/tmp
+backend/uploads
+
+backend/src/seeds/seedUser.ts

@@ -1,5 +1,5 @@
-import IORedis from "ioredis";
-import dotenv from "dotenv";
+import IORedis from 'ioredis';
+import dotenv from 'dotenv';
 dotenv.config();
 
 export const redisConnection = new IORedis({
@@ -11,10 +11,10 @@ export const redisConnection = new IORedis({
   maxRetriesPerRequest: null,
 });
 
-redisConnection.on("connect", () => {
-  console.log("Redis Connected");
+redisConnection.on('connect', () => {
+  console.log('Redis Connected');
 });
 
-redisConnection.on("error", (err) => {
-  console.error("Redis Error:", err);
+redisConnection.on('error', (err) => {
+  console.error('Redis Error:', err);
 });

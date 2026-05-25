@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 export const connectDB = async () => {
   try {
@@ -6,7 +6,7 @@ export const connectDB = async () => {
 
     console.log(`MongoDB Connected`);
   } catch (error) {
-    console.error("MongoDB Connection Error:", error);
+    console.error('MongoDB Connection Error:', error);
 
     process.exit(1);
   }

@@ -1,6 +1,6 @@
-import { ZodError } from "zod";
+import { ZodError } from 'zod';
 
-import { errorResponse } from "../utils/apiResponse";
+import { errorResponse } from '../utils/apiResponse';
 
 export const errorHandler = (err: any, _req: any, res: any, _next: any) => {
   // zod validation errors
@@ -8,13 +8,13 @@ export const errorHandler = (err: any, _req: any, res: any, _next: any) => {
     return errorResponse(
       res,
       400,
-      "VALIDATION_ERROR",
+      'VALIDATION_ERROR',
       err.issues[0].message,
 
       err.issues.map((e) => ({
         path: e.path,
         message: e.message,
-      }))
+      })),
     );
   }
 
@@ -27,7 +27,7 @@ export const errorHandler = (err: any, _req: any, res: any, _next: any) => {
   return errorResponse(
     res,
     500,
-    "INTERNAL_ERROR",
-    "An unexpected error occurred"
+    'INTERNAL_ERROR',
+    'An unexpected error occurred',
   );
 };

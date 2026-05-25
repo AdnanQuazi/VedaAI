@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from "express";
-import { AppError } from "../utils/AppError";
+import { Request, Response, NextFunction } from 'express';
+import { AppError } from '../utils/AppError';
 
 export const parseAssignmentFormData = (
   req: Request,
   _res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     if (req.body.questionConfigs) {
@@ -13,7 +13,7 @@ export const parseAssignmentFormData = (
 
     next();
   } catch (error) {
-    console.log("Error parsing questionConfigs:", error);
-    next(new AppError("Invalid questionConfigs format", 400, "INVALID_INPUT"));
+    console.log('Error parsing questionConfigs:', error);
+    next(new AppError('Invalid questionConfigs format', 400, 'INVALID_INPUT'));
   }
 };
